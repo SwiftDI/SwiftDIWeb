@@ -1,0 +1,9 @@
+<html>
+
+<body>
+    <h1>Result: {{ game.result }}</h1>
+
+    <a href="/games">See all results</a>
+</body>
+
+</html>

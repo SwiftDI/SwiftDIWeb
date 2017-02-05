@@ -1,0 +1,15 @@
+<html>
+
+<body>
+    <form action="/games" method="POST">
+        <label for="player1">P1</label>
+        <input id="player1" name="player1" type="text" />
+
+        <label for="player2">P2</label>
+        <input id="player2" name="player2" type="text" />
+
+        <input type="submit" value="Play!"/>
+    </form>
+</body>
+
+</html>
