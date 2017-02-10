@@ -16,13 +16,17 @@ class RPSGameHistoryObserver: GameHistoryObserver {
         }
     }
 
-    func fetched(game: Game?) {
+    func fetched(game: Game) {
         do {
-            if let game = game {
-                try response.render("game", context: ["game": GamePresenter(game: game)])
-            } else {
-                try response.status(.notFound).end()
-            }
+            try response.render("game", context: ["game": GamePresenter(game: game)])
+        } catch {
+            response.status(.internalServerError).send("error")
+        }
+    }
+
+    func gameNotFound() {
+        do {
+            try response.status(.notFound).end()
         } catch {
             response.status(.internalServerError).send("error")
         }
