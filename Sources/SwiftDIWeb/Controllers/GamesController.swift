@@ -21,7 +21,7 @@ final class GamesController {
     private func index(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
         defer { next() }
 
-        FetchGamesUseCase(observer: RPSGameHistoryObserver(response: response),
+        FetchGamesUseCase(observer: RPSFetchGamesObserver(response: response),
                           repo: gameRepository)
             .execute()
     }
@@ -41,7 +41,7 @@ final class GamesController {
         }
 
         FetchGameByIdUseCase(id: uuid,
-                             observer: RPSGameHistoryObserver(response: response),
+                             observer: RPSFetchGamesObserver(response: response),
                              repo: gameRepository)
             .execute()
     }
@@ -60,9 +60,9 @@ final class GamesController {
         }
 
         if let p1 = body["player1"], let p2 = body["player2"] {
-            PlayUseCase(p1: p1,
+            PlayGameUseCase(p1: p1,
                         p2: p2,
-                        observer: RPSGameObserver(response: response),
+                        observer: RPSPlayGameObserver(response: response),
                         repo: gameRepository)
                 .execute()
         }

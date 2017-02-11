@@ -1,7 +1,7 @@
 import SwiftDIHLP
 import Kitura
 
-class RPSGameHistoryObserver: GameHistoryObserver {
+class RPSFetchGamesObserver: FetchGamesObserver, FetchGameObserver {
     let response: RouterResponse
 
     init(response: RouterResponse) {
