@@ -10,7 +10,7 @@ class WebFetchGamesObserver: FetchGamesObserver, FetchGameObserver {
 
     func fetched(games: [Game]) {
         do {
-            try response.render("games", context: ["games": games.map({GamePresenter(game: $0)})])
+            try response.render("games.stencil", context: ["games": games.map({GamePresenter(game: $0)})])
         } catch {
             response.status(.internalServerError).send("error")
         }
@@ -18,7 +18,7 @@ class WebFetchGamesObserver: FetchGamesObserver, FetchGameObserver {
 
     func fetched(game: Game) {
         do {
-            try response.render("game", context: ["game": GamePresenter(game: game)])
+            try response.render("game.stencil", context: ["game": GamePresenter(game: game)])
         } catch {
             response.status(.internalServerError).send("error")
         }

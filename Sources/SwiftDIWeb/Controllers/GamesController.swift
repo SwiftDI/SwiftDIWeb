@@ -27,7 +27,7 @@ final class GamesController {
 
     private func new(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
         defer { next() }
-        try response.render("newGame", context: [:])
+        try response.render("newGame.stencil", context: [:])
     }
 
     private func show(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
