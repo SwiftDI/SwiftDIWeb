@@ -3,10 +3,7 @@ import SwiftDIHLP
 import Foundation
 
 final class GamesController {
-    let gameRepository: GameRepository
-
-    init(router: Router, gameRepository: GameRepository) {
-        self.gameRepository = gameRepository
+    init(router: Router) {
         createRoutes(router: router)
     }
 
@@ -21,8 +18,7 @@ final class GamesController {
     private func index(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
         defer { next() }
 
-        let fetchGames = FetchGames(repo: gameRepository)
-        fetchGames.execute(observer: WebFetchGamesObserver(response: response))
+        UseCases.fetchGames.execute(observer: WebFetchGamesObserver(response: response))
     }
 
     private func new(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
@@ -39,8 +35,7 @@ final class GamesController {
             return
         }
 
-        let fetchGameById = FetchGameById(repo: gameRepository)
-        fetchGameById.execute(id: uuid, observer: WebFetchGamesObserver(response: response))
+        UseCases.fetchGameById.execute(id: uuid, observer: WebFetchGamesObserver(response: response))
     }
 
     private func create(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
@@ -57,8 +52,7 @@ final class GamesController {
         }
 
         if let p1 = body["player1"], let p2 = body["player2"] {
-            let playGame = PlayGame(repo: gameRepository)
-            playGame.execute(p1: p1, p2: p2, observer: WebPlayGameObserver(response: response))
+            UseCases.playGame.execute(p1: p1, p2: p2, observer: WebPlayGameObserver(response: response))
         }
     }
 }
